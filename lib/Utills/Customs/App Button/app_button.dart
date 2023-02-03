@@ -207,6 +207,8 @@ class Appbutton {
     );
   }
 
+ 
+
   static deActivePrimaryButton({
     required BuildContext context,
     required String title,

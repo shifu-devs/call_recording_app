@@ -1,5 +1,5 @@
-import '/Module/Authentication/Views/splash.dart';
-import '../Module/Dashboard/Views/dashboard_view.dart';
+import '../module/authentication/views/splash.dart';
+import '../module/Dashboard/Views/dashboard_view.dart';
 import 'package:get/get.dart';
 
 class AppRoues {

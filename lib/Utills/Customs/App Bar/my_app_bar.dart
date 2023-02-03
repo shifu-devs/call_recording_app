@@ -1,11 +1,7 @@
 import 'package:delayed_display/delayed_display.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
-
 import '../textfeilds.dart';
 import '/Utills/App%20Theme/AppColors.dart';
 import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-
 import '../../App Theme/app_config.dart';
 import '../App Text/app_text.dart';
 

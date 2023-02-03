@@ -6,42 +6,38 @@ import 'package:flutter/material.dart';
 
 class MyAudioPlayer extends StatefulWidget {
   String sourcePath;
-  MyAudioPlayer({this.sourcePath = "", Key? key}) : super(key: key);
+  AudioPlayer audioPlayer;
+  MyAudioPlayer({required this.audioPlayer, this.sourcePath = "", Key? key})
+      : super(key: key);
 
   @override
-  State<MyAudioPlayer> createState() => _MyAudioPlayerState();
+  State<MyAudioPlayer> createState() => _MyAudioPlayerState(audioPlayer);
 }
 
 class _MyAudioPlayerState extends State<MyAudioPlayer> {
-  final _audioPlayer = AudioPlayer();
   bool isPlaying = false;
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
-  @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   playerDispose();
+  AudioPlayer? _audioPlayer;
 
-  //   duration = Duration.zero;
-  //   position = Duration.zero;
-
-  //   super.dispose();
-  // }
+  _MyAudioPlayerState(AudioPlayer audioPlayer) {
+    _audioPlayer = audioPlayer;
+  }
 
   @override
   void initState() {
     // _audioPlayer.setReleaseMode(ReleaseMode.release);
     setAudio();
-    _audioPlayer.onPlayerStateChanged.listen((state) {
+    _audioPlayer!.onPlayerStateChanged.listen((state) {
       setState(() {
         isPlaying = state == PlayerState.playing;
       });
-      _audioPlayer.onDurationChanged.listen((newDuration) {
+      _audioPlayer!.onDurationChanged.listen((newDuration) {
         setState(() {
           duration = newDuration;
         });
       });
-      _audioPlayer.onPositionChanged.listen((newPosition) {
+      _audioPlayer!.onPositionChanged.listen((newPosition) {
         setState(() {
           position = newPosition;
         });
@@ -54,9 +50,9 @@ class _MyAudioPlayerState extends State<MyAudioPlayer> {
   Future setAudio() async {
     // String url = "https://foo.com/bar.mp3";
     if (widget.sourcePath == "") {
-      await _audioPlayer.play(AssetSource("song1.mp3"));
+      await _audioPlayer!.play(AssetSource("song1.mp3"));
     } else {
-      await _audioPlayer.play(DeviceFileSource(widget.sourcePath));
+      await _audioPlayer!.play(DeviceFileSource(widget.sourcePath));
     }
 
     // _audioPlayer.play()
@@ -67,8 +63,8 @@ class _MyAudioPlayerState extends State<MyAudioPlayer> {
     return WillPopScope(
       onWillPop: () async {
         try {
-          _audioPlayer.stop();
-          _audioPlayer.dispose();
+          await _audioPlayer!.stop();
+          await _audioPlayer!.dispose();
         } catch (e) {
           print(">>>>>>>>>>>" + e.toString() + "<<<<<<<<");
         }
@@ -91,8 +87,8 @@ class _MyAudioPlayerState extends State<MyAudioPlayer> {
               value: position.inSeconds.toDouble(),
               onChanged: (value) async {
                 final pPositon = Duration(seconds: value.toInt());
-                await _audioPlayer.seek(pPositon);
-                await _audioPlayer.resume();
+                await _audioPlayer!.seek(pPositon);
+                await _audioPlayer!.resume();
               },
             ),
             Padding(
@@ -124,10 +120,10 @@ class _MyAudioPlayerState extends State<MyAudioPlayer> {
                     ),
                     onPressed: () async {
                       if (position - Duration(seconds: 10) > Duration.zero) {
-                        await _audioPlayer
+                        await _audioPlayer!
                             .seek(position - const Duration(seconds: 10));
                       } else {
-                        await _audioPlayer.seek(Duration.zero);
+                        await _audioPlayer!.seek(Duration.zero);
                       }
                     },
                   ),
@@ -144,19 +140,19 @@ class _MyAudioPlayerState extends State<MyAudioPlayer> {
                     onPressed: () async {
                       if (position.inSeconds != duration.inSeconds) {
                         if (isPlaying) {
-                          await _audioPlayer.pause();
+                          await _audioPlayer!.pause();
                         } else {
                           // await _audioPlayer.play(position: position,);
-                          await _audioPlayer.resume();
+                          await _audioPlayer!.resume();
                         }
                         // print(position);
                         // print(duration);
                       } else {
                         print("Position = duration");
                         position = Duration.zero;
-                        _audioPlayer.seek(position);
+                        _audioPlayer!.seek(position);
                         await setAudio();
-                        _audioPlayer.resume();
+                        _audioPlayer!.resume();
                       }
                     },
                   ),
@@ -172,11 +168,11 @@ class _MyAudioPlayerState extends State<MyAudioPlayer> {
                     ),
                     onPressed: () async {
                       if (position + Duration(seconds: 10) < duration) {
-                        await _audioPlayer
+                        await _audioPlayer!
                             .seek(position + const Duration(seconds: 10));
                       } else {
-                        await _audioPlayer.seek(Duration.zero);
-                        await _audioPlayer.pause();
+                        await _audioPlayer!.seek(Duration.zero);
+                        await _audioPlayer!.pause();
                       }
                     },
                   ),

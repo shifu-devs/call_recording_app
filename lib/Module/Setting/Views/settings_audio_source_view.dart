@@ -1,7 +1,7 @@
-import 'package:call_recording_app/Module/Lock/Views/app_password_view.dart';
-import 'package:call_recording_app/Module/Setting/Components/app_password_card.dart';
-import 'package:call_recording_app/Module/Setting/Components/block_white_list.dart';
-import 'package:call_recording_app/Module/Setting/Components/record_calls_from.dart';
+import 'package:call_recording_app/module/Lock/Views/app_password_view.dart';
+import 'package:call_recording_app/module/Setting/Components/app_password_card.dart';
+import 'package:call_recording_app/module/Setting/Components/block_white_list.dart';
+import 'package:call_recording_app/module/Setting/Components/record_calls_from.dart';
 import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
 import 'package:call_recording_app/Utills/App%20Theme/app_config.dart';
 import 'package:call_recording_app/Utills/Customs/App%20Bar/my_app_bar.dart';

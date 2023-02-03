@@ -1,7 +1,8 @@
 // import 'dart:js_util';
 
-import 'package:call_recording_app/Module/Player/Components/audio_player.dart';
-import 'package:call_recording_app/Module/Player/Components/file_detail_card.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:call_recording_app/module/Player/Components/audio_player.dart';
+import 'package:call_recording_app/module/Player/Components/file_detail_card.dart';
 // import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
 import 'package:call_recording_app/Utills/App%20Theme/app_config.dart';
 import 'package:call_recording_app/Utills/Customs/App%20Bar/my_app_bar.dart';
@@ -12,7 +13,8 @@ import 'package:get/get.dart';
 
 class PlayerView extends StatelessWidget {
   String source;
-  PlayerView({this.source ="", Key? key}) : super(key: key);
+  PlayerView({this.source = "", Key? key}) : super(key: key);
+  final audioPlayer = AudioPlayer();
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,8 @@ class PlayerView extends StatelessWidget {
             // color: Colors.red,
             child: DelayedDisplay(
               delay: Duration(milliseconds: 300),
-              child: MyAudioPlayer(sourcePath: source),
+              child:
+                  MyAudioPlayer(audioPlayer: audioPlayer, sourcePath: source),
             ),
           ),
         ],

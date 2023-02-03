@@ -1,7 +1,5 @@
-import 'package:call_recording_app/Module/Authentication/Views/login_view.dart';
-import 'package:call_recording_app/Module/Setting/Views/settings_audio_source_view.dart';
-import 'package:call_recording_app/Module/Setting/Views/settings_view.dart';
-import 'package:call_recording_app/Module/Voice%20Recordings/Views/voice_recoreder_view.dart';
+import 'package:call_recording_app/module/Authentication/views/login_view.dart';
+import 'package:call_recording_app/module/Setting/Views/settings_view.dart';
 import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
 import 'package:call_recording_app/Utills/App%20Theme/app_config.dart';
 import 'package:call_recording_app/Utills/Customs/App%20Text/app_text.dart';
@@ -9,6 +7,8 @@ import 'package:call_recording_app/Utills/Customs/Drawer/Components/drawer_tile.
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../module/voice_recorder/Views/voice_recoreder_view.dart';
 
 class AppDrawer {
   drawer({required BuildContext context, required Function tilePressed}) {

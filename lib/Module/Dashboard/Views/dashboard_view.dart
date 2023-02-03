@@ -1,6 +1,5 @@
-import 'package:call_recording_app/Module/Call%20Recordings/Views/all_calls_view.dart';
-import 'package:call_recording_app/Module/Favourite/Views/favourite_view.dart';
-import 'package:call_recording_app/Module/Voice%20Recordings/Views/voice_recoreder_view.dart';
+import 'package:call_recording_app/module/Call%20Recordings/Views/all_calls_view.dart';
+import 'package:call_recording_app/module/Favourite/Views/favourite_view.dart';
 import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
 
 import 'package:flutter/material.dart';
@@ -40,11 +39,13 @@ class DashboardView extends StatelessWidget {
       PersistentBottomNavBarItem(
         icon: Icon(Icons.home),
         title: "All",
+        textStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
         activeColorPrimary: Colors.white,
         inactiveColorPrimary: Color.fromARGB(255, 182, 179, 179),
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.call_received_sharp),
+        textStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
         title: "Incomming",
         activeColorPrimary: Colors.white,
         inactiveColorPrimary: Color.fromARGB(255, 182, 179, 179),
@@ -53,10 +54,12 @@ class DashboardView extends StatelessWidget {
         icon: Icon(Icons.call_made_sharp),
         title: "Outgoing",
         activeColorPrimary: Colors.white,
+        textStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
         inactiveColorPrimary: Color.fromARGB(255, 182, 179, 179),
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.favorite),
+        textStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
         title: "Favourite",
         activeColorPrimary: Colors.white,
         inactiveColorPrimary: Color.fromARGB(255, 182, 179, 179),

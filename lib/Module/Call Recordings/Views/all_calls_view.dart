@@ -1,13 +1,12 @@
-import 'package:call_recording_app/Module/Call%20Recordings/View%20Model/call_recording_controller.dart';
-import 'package:call_recording_app/Module/Filters/Views/filter_view.dart';
-import 'package:call_recording_app/Utills/Customs/Drawer/app_drawer.dart';
-import 'package:call_recording_app/Utills/Voice%20Tile/voice_tile.dart';
+import '/../Module/Call%20Recordings/View%20Model/call_recording_controller.dart';
+import '/../Module/Filters/Views/filter_view.dart';
+import '/../Utills/Customs/Drawer/app_drawer.dart';
+import '/../Utills/Voice%20Tile/voice_tile.dart';
 // import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
-import 'package:call_recording_app/Utills/App%20Theme/app_config.dart';
-import 'package:call_recording_app/Utills/Customs/App%20Bar/my_app_bar.dart';
+import '/../Utills/App%20Theme/app_config.dart';
+import '/../Utills/Customs/App%20Bar/my_app_bar.dart';
 import 'package:delayed_display/delayed_display.dart';
-// import 'package:call_recording_app/Utills/Customs/App%20Text/app_text.dart';
-// import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,9 +1,9 @@
 import 'dart:async';
-
-import 'package:call_recording_app/Module/Dashboard/Views/dashboard_view.dart';
-import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
+import '/app_services/local_data_saver.dart';
+import '/module/Dashboard/Views/dashboard_view.dart';
+import '/module/Lock/Views/lock_view.dart';
+import '/Utills/App%20Theme/AppColors.dart';
 import 'package:delayed_display/delayed_display.dart';
-// import 'package:call_recording_app/Utills/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simple_ripple_animation/simple_ripple_animation.dart';
@@ -19,17 +19,25 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 5), () {
+    initVar();
+  }
+
+  initVar() async {
+    bool isLockSet;
+    try {
+      isLockSet =
+          (await AppLocalDataSaver.getBool(AppLocalDataSaver.isAppLockKey))!;
+    } catch (e) {
+      isLockSet = false;
+    }
+    Timer(Duration(seconds: 3), () {
       // print("Onvorarding start");
-      Get.offAll(() => DashboardView());
+      Get.offAll(() => isLockSet ? EnterPinView() : DashboardView());
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // TextTheme _textThem = Theme.of(context).textTheme;
-    // IconThemeData _iconTheme = Theme.of(context).iconTheme;
-    // ButtonTheme _buttonTheme = Theme.of(context).elevatedButtonTheme;
     return Scaffold(
       // appBar: AppBar(),
       body: Container(

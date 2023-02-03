@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
+import 'package:call_recording_app/Utills/App%20Theme/app_config.dart';
+import 'package:call_recording_app/Utills/Customs/App%20Text/app_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:record/record.dart';
@@ -87,28 +90,49 @@ class _MyVoiceRecorderState extends State<MyVoiceRecorder> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _buildRecordStopControl(),
-                const SizedBox(width: 20),
-                _buildPauseResumeControl(),
-                const SizedBox(width: 20),
-                _buildText(),
-              ],
-            ),
-            if (_amplitude != null) ...[
-              const SizedBox(height: 40),
-              Text('Current: ${_amplitude?.current ?? 0.0}'),
-              Text('Max: ${_amplitude?.max ?? 0.0}'),
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _buildRecordStopControl(),
+              const SizedBox(width: 20),
+              _buildPauseResumeControl(),
             ],
+          ),
+          const SizedBox(height: 30),
+          _buildText(),
+          if (_amplitude != null) ...[
+            const SizedBox(height: 40),
+            Container(
+              width: AppConfig(context).width * 0.80,
+              // margin: EdgeInsets.only(left: 20),
+              decoration: BoxDecoration(
+                  color: AppColors.background.withOpacity(0.7),
+                  borderRadius: BorderRadius.circular(10)),
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppText.text(
+                    'Current: ${_amplitude?.current ?? 0.0}',
+                    textAlignment: TextAlign.start,
+                    color: AppColors.darkPrimaryColor,
+                  ),
+                  AppText.text(
+                    'Max: ${_amplitude?.max ?? 0.0}',
+                    color: AppColors.darkPrimaryColor,
+                    textAlignment: TextAlign.start,
+                  ),
+                ],
+              ),
+            )
           ],
-        ),
+        ],
       ),
     );
   }
@@ -127,19 +151,19 @@ class _MyVoiceRecorderState extends State<MyVoiceRecorder> {
     late Color color;
 
     if (_recordState != RecordState.stop) {
-      icon = const Icon(Icons.stop, color: Colors.red, size: 30);
-      color = Colors.red.withOpacity(0.1);
+      icon = const Icon(Icons.stop, color: Colors.red, size: 45);
+      color = Colors.white.withOpacity(0.8);
     } else {
       final theme = Theme.of(context);
-      icon = Icon(Icons.mic, color: theme.primaryColor, size: 30);
-      color = theme.primaryColor.withOpacity(0.1);
+      icon = Icon(Icons.mic, color: AppColors.background, size: 45);
+      color = AppColors.background.withOpacity(0.3);
     }
 
     return ClipOval(
       child: Material(
         color: color,
         child: InkWell(
-          child: SizedBox(width: 56, height: 56, child: icon),
+          child: SizedBox(width: 100, height: 100, child: icon),
           onTap: () {
             (_recordState != RecordState.stop) ? _stop() : _start();
           },
@@ -157,11 +181,11 @@ class _MyVoiceRecorderState extends State<MyVoiceRecorder> {
     late Color color;
 
     if (_recordState == RecordState.record) {
-      icon = const Icon(Icons.pause, color: Colors.red, size: 30);
-      color = Colors.red.withOpacity(0.1);
+      icon = const Icon(Icons.pause, color: Colors.red, size: 45);
+      color = Colors.white.withOpacity(0.8);
     } else {
       final theme = Theme.of(context);
-      icon = const Icon(Icons.play_arrow, color: Colors.red, size: 30);
+      icon = const Icon(Icons.play_arrow, color: Colors.red, size: 45);
       color = theme.primaryColor.withOpacity(0.1);
     }
 
@@ -169,7 +193,7 @@ class _MyVoiceRecorderState extends State<MyVoiceRecorder> {
       child: Material(
         color: color,
         child: InkWell(
-          child: SizedBox(width: 56, height: 56, child: icon),
+          child: SizedBox(width: 100, height: 100, child: icon),
           onTap: () {
             (_recordState == RecordState.pause) ? _resume() : _pause();
           },
@@ -183,16 +207,28 @@ class _MyVoiceRecorderState extends State<MyVoiceRecorder> {
       return _buildTimer();
     }
 
-    return const Text("Waiting to record");
+    return AppText.text(
+      "Tap to start recording",
+      fontsize: 20,
+      fontweight: FontWeight.w400,
+      color: AppColors.background,
+    );
   }
 
   Widget _buildTimer() {
     final String minutes = _formatNumber(_recordDuration ~/ 60);
     final String seconds = _formatNumber(_recordDuration % 60);
 
-    return Text(
-      '$minutes : $seconds',
-      style: const TextStyle(color: Colors.red),
+    return SizedBox(
+      width: 100,
+      child: AppText.text(
+        '$minutes : $seconds',
+        fontsize: 30,
+        maxlines: 2,
+        textAlignment: TextAlign.start,
+        fontweight: FontWeight.w400,
+        color: Colors.white,
+      ),
     );
   }
 

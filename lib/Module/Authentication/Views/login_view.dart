@@ -1,4 +1,4 @@
-import 'package:call_recording_app/Module/Authentication/Views/signup_view.dart';
+import 'package:call_recording_app/module/Authentication/Views/signup_view.dart';
 import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
 import 'package:delayed_display/delayed_display.dart';
 

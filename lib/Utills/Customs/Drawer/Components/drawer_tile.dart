@@ -12,6 +12,8 @@ class DrawerTile {
       required String tileName,
       double iconSize = 25,
       double fontSize = 15,
+     
+      Widget? suffixWidget,
       GestureTapCallback? onPressed}) {
     return DelayedDisplay(
       delay: Duration(milliseconds: 300),
@@ -20,7 +22,7 @@ class DrawerTile {
         child: ListTile(
           // tileColor: Colors.red,
           onTap: onPressed,
-
+trailing: suffixWidget,
           leading: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -40,6 +42,7 @@ class DrawerTile {
                 fontweight: FontWeight.w500,
               ),
             ],
+            
           ),
         ),
       ),
