@@ -27,6 +27,12 @@ class ActionOnVoiceRocrding extends StatelessWidget {
         title: "My Recording",
         isCenterTitle: true,
         textColor: AppColors.background,
+        isBackButton: true,
+        backOnPressed: () async {
+          await _audioPlayer.stop();
+          await _audioPlayer.dispose();
+          Get.back();
+        },
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -44,8 +50,21 @@ class ActionOnVoiceRocrding extends StatelessWidget {
             title: "Rename & Save",
             fontsize: 18,
             width: AppConfig(context).width * 0.75,
-            callback: () {
-              Get.dialog(SaveRecordingDialog());
+            callback: () async {
+              // await Get.dialog(saveDialoge(context));
+              // _controller.saveTextFieldController.value.text = "My Recording";
+              await showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                    insetPadding: EdgeInsets.zero,
+                    titlePadding: EdgeInsets.zero,
+                    contentPadding: EdgeInsets.zero,
+                    backgroundColor: AppColors.transparent,
+                    content: SaveDialogue()),
+              );
+              await _audioPlayer.stop();
+              _controller.dispose();
+              Get.back();
             },
           ),
           const SizedBox(
@@ -67,25 +86,94 @@ class ActionOnVoiceRocrding extends StatelessWidget {
       ),
     );
   }
+
+  // saveDialoge(BuildContext context) {
+  //   return Dialog(
+  //     insetPadding: EdgeInsets.zero,
+  //     backgroundColor: Colors.transparent,
+  //     child: Container(
+  //       height: AppConfig(context).height * 0.40,
+  //       width: AppConfig(context).width * 0.90,
+  //       decoration: BoxDecoration(
+  //         color: AppColors.background,
+  //         borderRadius: BorderRadius.circular(10),
+  //       ),
+  //       padding: EdgeInsets.all(20),
+  //       child: Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //         children: [
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.end,
+  //             children: [
+  //               InkWell(
+  //                 onTap: () => Get.back(),
+  //                 child: const Icon(
+  //                   Icons.close,
+  //                   size: 30,
+  //                   color: AppColors.dark,
+  //                 ),
+  //               )
+  //             ],
+  //           ),
+  //           Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               Padding(
+  //                 padding:
+  //                     EdgeInsets.only(top: AppConfig(context).width * 0.02),
+  //                 child: AppText.text("Enter Voice Title",
+  //                     textAlignment: TextAlign.left,
+  //                     color: Colors.black,
+  //                     fontsize: 18,
+  //                     fontweight: FontWeight.w600),
+  //               ),
+  //               AppTextFormFiled(
+  //                 keyboardtype: TextInputType.emailAddress,
+  //                 text: "My voice is owesome",
+  //                 fontweight: FontWeight.w400,
+  //                 cntr: _controller.saveTextFieldController.value,
+  //               ),
+  //             ],
+  //           ),
+  //           Appbutton().primaryButton(
+  //             context: context,
+  //             title: "Save Recording",
+  //             fontsize: 20,
+  //             borderradius: 10,
+  //             callback: () async {
+  //               // Get.back();
+  //               try {
+  //                 await _controller.copyFile(_controller.audioPath.value);
+  //               } catch (e) {
+  //                 print(">>>>>>>>>>>>>>> " +
+  //                     e.toString() +
+  //                     " <<<<<<<<<<<<<<<<<<<<<<<");
+  //               }
+  //               // Get.back();
+  //             },
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }
 
-class SaveRecordingDialog extends StatelessWidget {
-  SaveRecordingDialog({
-    super.key,
-  });
+class SaveDialogue extends StatelessWidget {
+  SaveDialogue({Key? key}) : super(key: key);
   final _controller = Get.find<VoiceRecordingViewModel>();
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      insetPadding: EdgeInsets.zero,
-      backgroundColor: Colors.transparent,
-      child: Container(
+    return Obx(
+      () => Container(
         height: AppConfig(context).height * 0.40,
         width: AppConfig(context).width * 0.90,
         decoration: BoxDecoration(
           color: AppColors.background,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
         padding: EdgeInsets.all(20),
         child: Column(
@@ -112,7 +200,7 @@ class SaveRecordingDialog extends StatelessWidget {
                 Padding(
                   padding:
                       EdgeInsets.only(top: AppConfig(context).width * 0.02),
-                  child: AppText.text("Enter Title",
+                  child: AppText.text("Enter Voice Title",
                       textAlignment: TextAlign.left,
                       color: Colors.black,
                       fontsize: 18,
@@ -120,9 +208,36 @@ class SaveRecordingDialog extends StatelessWidget {
                 ),
                 AppTextFormFiled(
                   keyboardtype: TextInputType.emailAddress,
-                  text: "My voice is owsome",
+                  text: "My voice is owesome",
                   fontweight: FontWeight.w400,
                   cntr: _controller.saveTextFieldController.value,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AppText.text(
+                      "Is your favorite?",
+                      fontsize: 18,
+                      fontweight: FontWeight.w500,
+                      color: AppColors.primaryColor(),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        _controller.isFavourite.value =
+                            !_controller.isFavourite.value;
+                      },
+                      child: Icon(
+                        _controller.isFavourite.value
+                            ? Icons.favorite_rounded
+                            : Icons.favorite_outline,
+                        size: 30,
+                        color: AppColors.dark,
+                      ),
+                    )
+                  ],
                 ),
               ],
             ),
@@ -131,8 +246,17 @@ class SaveRecordingDialog extends StatelessWidget {
               title: "Save Recording",
               fontsize: 20,
               borderradius: 10,
-              callback: () {
-                _controller.copyFile(_controller.audioPath.value);
+              callback: () async {
+                // Get.back();
+                try {
+                  await _controller.copyFile(_controller.audioPath.value);
+                  Get.back();
+                } catch (e) {
+                  print(">>>>>>>>>>>>>>> " +
+                      e.toString() +
+                      " <<<<<<<<<<<<<<<<<<<<<<<");
+                }
+                // Get.back();
               },
             ),
           ],

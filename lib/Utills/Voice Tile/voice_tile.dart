@@ -1,7 +1,4 @@
-// import 'package:call_recording_app/Module/Player/Views/player_view.dart';
 import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-
 import '../App Theme/AppColors.dart';
 import '../App Theme/app_config.dart';
 import '../Customs/App Text/app_text.dart';
@@ -10,10 +7,11 @@ class VoiceTile {
   allCallsTile(
           {required context,
           required String callerName,
-          callDuration,
-          callDateTime,
+          String callDuration = "",
+          String callDateTime = "",
           bool isFav = false,
           bool isGoing = false,
+          bool isRecording = false,
           GestureTapCallback? onTapTile,
           GestureTapCallback? longPressed,
           Function? onTileSelect,
@@ -77,28 +75,37 @@ class VoiceTile {
                         )
                       : isFav
                           ? Icon(
-                              Icons.star_rounded,
-                              size: AppConfig(context).width / 15,
-                              color: Colors.orange,
+                              Icons.favorite,
+                              size: 25,
+                              color: AppColors.primaryColor(),
                             )
                           : Icon(
-                              Icons.star_border_outlined,
-                              size: AppConfig(context).width / 15,
-                              color: Colors.black,
+                              Icons.favorite_border_outlined,
+                              size: 25,
+                              color: AppColors.primaryColor(),
                             ),
                 ),
               ]),
-          leading: isGoing
-              ? Icon(
-                  Icons.call_received,
-                  color: Colors.green,
-                  size: AppConfig(context).width / 15,
-                )
-              : Icon(
-                  Icons.call_made,
-                  color: Colors.blue,
-                  size: AppConfig(context).width / 15,
-                ),
+          leading: SizedBox(
+            height: 50,
+            child: isRecording
+                ? Icon(
+                    Icons.mic,
+                    color: AppColors.primaryColor(),
+                    size: 35,
+                  )
+                : isGoing
+                    ? Icon(
+                        Icons.call_received,
+                        color: Colors.green,
+                        size: AppConfig(context).width / 15,
+                      )
+                    : Icon(
+                        Icons.call_made,
+                        color: Colors.blue,
+                        size: AppConfig(context).width / 15,
+                      ),
+          ),
         ),
       );
 }

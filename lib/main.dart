@@ -42,31 +42,29 @@ class _MyAppState extends State<MyApp> {
     if (Platform.isAndroid) {
       final PermissionStatus permissionStatus = await Permission.storage.status;
       if (permissionStatus != PermissionStatus.granted) {
-        print("storgae");
         await Permission.storage.request();
       }
       final PermissionStatus permissionStatus2 =
           await Permission.manageExternalStorage.status;
       if (permissionStatus2 != PermissionStatus.granted) {
-        print("manage external storage");
         await Permission.manageExternalStorage.request();
       }
       final PermissionStatus permissionStatus3 =
           await Permission.microphone.status;
       if (permissionStatus3 != PermissionStatus.granted) {
-        print("Microphone");
-
         await Permission.microphone.request();
       }
+      final PermissionStatus permissionStatus4 =
+          await Permission.contacts.status;
+      if (permissionStatus4 != PermissionStatus.granted) {
+        await Permission.contacts.request();
+      }
+      //  final PermissionStatus permissionStatus5 =
+      //     await Permission.;
+      // if (permissionStatus4 != PermissionStatus.granted) {
+      //   await Permission.contacts.request();
+      // }
     }
-    // var status = await Permission.storage.status;
-    // if (status.isGranted) {
-    //   await Permission.storage.request();
-    // }
-    // var status1 = await Permission.manageExternalStorage.status;
-    // if (status1.isGranted) {
-    //   await Permission.manageExternalStorage.request();
-    // }
   }
 
   themeListner() {

@@ -1,5 +1,7 @@
 // import 'dart:js_util';
 
+import 'dart:io';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:call_recording_app/module/Player/Components/audio_player.dart';
 import 'package:call_recording_app/module/Player/Components/file_detail_card.dart';
@@ -13,20 +15,37 @@ import 'package:get/get.dart';
 
 class PlayerView extends StatelessWidget {
   String source;
-  PlayerView({this.source = "", Key? key}) : super(key: key);
+  String fileName;
+
+  PlayerView({this.source = "", this.fileName = "", Key? key})
+      : super(key: key);
+
   final audioPlayer = AudioPlayer();
 
   @override
   Widget build(BuildContext context) {
+    File file = File(source);
+    FileStat fileStat = file.statSync();
+    int fileSize = fileStat.size;
+    double fileSizeMB = fileSize / (1024 * 1024);
+    double fileSizeKB = fileSize / 1024;
+    String realSize;
+    if (fileSizeMB.floor() == 0) {
+      realSize = fileSizeKB.toStringAsFixed(2) + " KB";
+    } else {
+      realSize = fileSizeMB.toStringAsFixed(2) + " MB";
+    }
+
     return Scaffold(
       appBar: CustomAppBar().simpleAppBar(
         context: context,
         title: "Jabran Haider",
         textColor: Colors.white,
-        isBackButton: false,
-        backOnPressed: () {
-          //   _audioPlayer.stop();
-          // _audioPlayer.dispose();
+        isBackButton: true,
+        backOnPressed: () async {
+          await audioPlayer.stop();
+          await audioPlayer.dispose();
+          Get.back();
         },
         isCenterTitle: true,
         isPlayer: true,
@@ -40,10 +59,13 @@ class PlayerView extends StatelessWidget {
             delay: Duration(milliseconds: 200),
             child: FileDetailCard().fileDetails(
               context: context,
-              fileLocation:
-                  "sdcard/CallRecordings/62_55_6asda_asd_song_asdbs_asdbhbhaxhabs.mps",
-              fileName: "62_55_6asda_asd_song_asdbs_asdbhbhaxhabs.mps",
-              fileSize: "2.5 MB",
+              fileLocation: source != ""
+                  ? source.substring(19)
+                  : "sdcard/CallRecordings/62_55_6asda_asd_song_asdbs_asdbhbhaxhabs.mps",
+              fileName: fileName != ""
+                  ? fileName
+                  : "62_55_6asda_asd_song_asdbs_asdbhbhaxhabs.mps",
+              fileSize: realSize,
             ),
           ),
           SizedBox(

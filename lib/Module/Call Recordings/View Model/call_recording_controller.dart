@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 class CallRecordingController extends GetxController {
   final listOfVoices = <Voices>[].obs;
-  final Rxn<Voices> voiceData = Rxn<Voices>();
+  // final Rxn<Voices> voiceData = Rxn<Voices>();
   
 
   final myval = false.obs;

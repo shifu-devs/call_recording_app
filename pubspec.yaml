@@ -48,6 +48,7 @@ dependencies:
   shared_preferences: ^2.0.17
   spring: ^2.0.2
   permission_handler: ^10.2.0
+  sqflite: ^2.2.4+1
   
 
 

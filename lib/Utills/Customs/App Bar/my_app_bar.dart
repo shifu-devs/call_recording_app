@@ -70,7 +70,7 @@ class CustomAppBar {
             ? IconButton(
                 onPressed: starIconPressed,
                 icon: const Icon(
-                  Icons.star,
+                  Icons.favorite,
                   color: AppColors.background,
                 ),
               )
