@@ -1,4 +1,5 @@
-import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
+
+import '/utills/app_theme/AppColors.dart';
 import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData(

@@ -1,8 +1,8 @@
 import 'dart:async';
 import '/app_services/local_data_saver.dart';
-import '../../dashboard/views/dashboard_view.dart';
-import '/module/Lock/Views/lock_view.dart';
-import '/Utills/App%20Theme/AppColors.dart';
+import '/module/dashboard/views/dashboard_view.dart';
+import '/module/lock/views/lock_view.dart';
+import '/utills/app_theme/AppColors.dart';
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

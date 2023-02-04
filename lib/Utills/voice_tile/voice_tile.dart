@@ -1,7 +1,7 @@
+import '/utills/app_theme/AppColors.dart';
+import '/utills/app_theme/app_config.dart';
+import '/utills/customs/app_text/app_text.dart';
 import 'package:flutter/material.dart';
-import '../app_theme/AppColors.dart';
-import '../app_theme/app_config.dart';
-import '../customs/App Text/app_text.dart';
 
 class VoiceTile {
   allCallsTile(

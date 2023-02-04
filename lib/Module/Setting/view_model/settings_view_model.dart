@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:math';
-
-import 'package:call_recording_app/app_services/local_data_saver.dart';
-import 'package:call_recording_app/module/dashboard/views/dashboard_view.dart';
-import 'package:call_recording_app/Utills/Customs/App%20Message/toast_message.dart';
+import '/app_services/local_data_saver.dart';
+import '/module/dashboard/views/dashboard_view.dart';
+import '/utills/customs/app_message/toast_message.dart';
 import 'package:get/get.dart';
 
 class SettingsViewModel extends GetxController {

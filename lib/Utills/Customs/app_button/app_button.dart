@@ -1,10 +1,9 @@
-import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
+
+import '/utills/app_theme/AppColors.dart';
+import '/utills/app_theme/app_config.dart';
+import '/utills/customs/app_text/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
-import '../../app_theme/app_config.dart';
-import '../app_text/app_text.dart';
-
 class Appbutton {
   primaryButton({
     required BuildContext context,

@@ -1,9 +1,9 @@
+import '/utills/app_theme/AppColors.dart';
+import '/utills/app_theme/app_config.dart';
+import '/utills/customs/app_text/app_text.dart';
+import 'package:call_recording_app/utills/customs/textfeilds.dart';
 import 'package:delayed_display/delayed_display.dart';
-import '../textfeilds.dart';
-import '/Utills/App%20Theme/AppColors.dart';
 import 'package:flutter/material.dart';
-import '../../app_theme/app_config.dart';
-import '../App Text/app_text.dart';
 
 class CustomAppBar {
   simpleAppBar({

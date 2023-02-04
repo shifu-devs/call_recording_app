@@ -1,7 +1,8 @@
-import 'package:call_recording_app/module/call_recordings/views/all_calls_view.dart';
-import 'package:call_recording_app/module/Favourite/Views/favourite_view.dart';
-import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
 
+
+import '/module/call_recordings/views/all_calls_view.dart';
+import '/module/favourite/views/favourite_view.dart';
+import '/utills/app_theme/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
