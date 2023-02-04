@@ -1,14 +1,13 @@
-import 'dart:math';
-import '/Utills/Customs/App%20Text/app_text.dart';
-import '/module/Setting/View%20Model/settings_view_model.dart';
-import 'package:flutter/material.dart';
+import '/module/setting/view_model/settings_view_model.dart';
+import '/utills/customs/app_button/app_button.dart';
+import '/utills/customs/app_text/app_text.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
-import 'package:get/get.dart';
 import 'package:spring/spring.dart';
-import '../../../Utills/App Theme/AppColors.dart';
-import '../../../Utills/App Theme/app_config.dart';
-import '../../../Utills/Customs/App Button/app_button.dart';
+import '/utills/app_theme/AppColors.dart';
+import '/utills/app_theme/app_config.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class EnterPinView extends StatefulWidget {
   const EnterPinView({Key? key}) : super(key: key);

@@ -1,8 +1,7 @@
+import '/utills/app_theme/AppColors.dart';
+import '/utills/app_theme/app_config.dart';
+import '/utills/customs/app_text/app_text.dart';
 import 'package:flutter/material.dart';
-
-import '../../../Utills/App Theme/AppColors.dart';
-import '../../../Utills/App Theme/app_config.dart';
-import '../../../Utills/Customs/App Text/app_text.dart';
 
 class RecordCallsFrom {
   card({

@@ -1,17 +1,15 @@
-import 'dart:io';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
-import 'package:call_recording_app/Utills/Customs/App%20Bar/my_app_bar.dart';
-import 'package:call_recording_app/Utills/Customs/App%20Text/app_text.dart';
-import 'package:call_recording_app/Utills/Customs/textfeilds.dart';
-import 'package:call_recording_app/module/voice_recorder/view_model/voice_recording_view_model.dart';
+import '/module/player/components/audio_player.dart';
+import '/module/voice_recorder/view_model/voice_recording_view_model.dart';
+import '/utills/app_theme/AppColors.dart';
+import '/utills/app_theme/app_config.dart';
+import '/utills/customs/app_bar/my_app_bar.dart';
+import '/utills/customs/app_button/app_button.dart';
+import '/utills/customs/app_text/app_text.dart';
+import '/utills/customs/textfeilds.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../Utills/App Theme/app_config.dart';
-import '../../../Utills/Customs/App Button/app_button.dart';
-import '../../Player/Components/audio_player.dart';
 
 class ActionOnVoiceRocrding extends StatelessWidget {
   ActionOnVoiceRocrding({Key? key}) : super(key: key);
@@ -87,78 +85,6 @@ class ActionOnVoiceRocrding extends StatelessWidget {
     );
   }
 
-  // saveDialoge(BuildContext context) {
-  //   return Dialog(
-  //     insetPadding: EdgeInsets.zero,
-  //     backgroundColor: Colors.transparent,
-  //     child: Container(
-  //       height: AppConfig(context).height * 0.40,
-  //       width: AppConfig(context).width * 0.90,
-  //       decoration: BoxDecoration(
-  //         color: AppColors.background,
-  //         borderRadius: BorderRadius.circular(10),
-  //       ),
-  //       padding: EdgeInsets.all(20),
-  //       child: Column(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //         children: [
-  //           Row(
-  //             mainAxisAlignment: MainAxisAlignment.end,
-  //             children: [
-  //               InkWell(
-  //                 onTap: () => Get.back(),
-  //                 child: const Icon(
-  //                   Icons.close,
-  //                   size: 30,
-  //                   color: AppColors.dark,
-  //                 ),
-  //               )
-  //             ],
-  //           ),
-  //           Column(
-  //             mainAxisSize: MainAxisSize.min,
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               Padding(
-  //                 padding:
-  //                     EdgeInsets.only(top: AppConfig(context).width * 0.02),
-  //                 child: AppText.text("Enter Voice Title",
-  //                     textAlignment: TextAlign.left,
-  //                     color: Colors.black,
-  //                     fontsize: 18,
-  //                     fontweight: FontWeight.w600),
-  //               ),
-  //               AppTextFormFiled(
-  //                 keyboardtype: TextInputType.emailAddress,
-  //                 text: "My voice is owesome",
-  //                 fontweight: FontWeight.w400,
-  //                 cntr: _controller.saveTextFieldController.value,
-  //               ),
-  //             ],
-  //           ),
-  //           Appbutton().primaryButton(
-  //             context: context,
-  //             title: "Save Recording",
-  //             fontsize: 20,
-  //             borderradius: 10,
-  //             callback: () async {
-  //               // Get.back();
-  //               try {
-  //                 await _controller.copyFile(_controller.audioPath.value);
-  //               } catch (e) {
-  //                 print(">>>>>>>>>>>>>>> " +
-  //                     e.toString() +
-  //                     " <<<<<<<<<<<<<<<<<<<<<<<");
-  //               }
-  //               // Get.back();
-  //             },
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 }
 
 class SaveDialogue extends StatelessWidget {

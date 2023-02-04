@@ -1,9 +1,8 @@
+import '/utills/app_theme/AppColors.dart';
+import '/utills/app_theme/app_config.dart';
+import '/utills/customs/app_text/app_text.dart';
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
-
-import '../../../App Theme/AppColors.dart';
-import '../../../App Theme/app_config.dart';
-import '../../App Text/app_text.dart';
 
 class DrawerTile {
   tile(

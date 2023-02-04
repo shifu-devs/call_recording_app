@@ -1,11 +1,10 @@
-import 'package:call_recording_app/module/Lock/Views/app_password_view.dart';
-import 'package:call_recording_app/module/Setting/Components/app_password_card.dart';
-import 'package:call_recording_app/module/Setting/Components/block_white_list.dart';
-import 'package:call_recording_app/module/Setting/Components/record_calls_from.dart';
-import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
-import 'package:call_recording_app/Utills/App%20Theme/app_config.dart';
-import 'package:call_recording_app/Utills/Customs/App%20Bar/my_app_bar.dart';
-// import 'package:call_recording_app/Utills/Customs/App%20Text/app_text.dart';
+import '/utills/customs/app_bar/my_app_bar.dart';
+import '/module/lock/views/app_password_view.dart';
+import '/module/setting/components/app_password_card.dart';
+import '/module/setting/components/block_white_list.dart';
+import '/module/setting/components/record_calls_from.dart';
+import '/utills/app_theme/AppColors.dart';
+import '/utills/app_theme/app_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

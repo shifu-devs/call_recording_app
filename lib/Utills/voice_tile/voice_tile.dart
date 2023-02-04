@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../App Theme/AppColors.dart';
-import '../App Theme/app_config.dart';
-import '../Customs/App Text/app_text.dart';
+import '../app_theme/AppColors.dart';
+import '../app_theme/app_config.dart';
+import '../customs/App Text/app_text.dart';
 
 class VoiceTile {
   allCallsTile(
@@ -57,9 +57,11 @@ class VoiceTile {
               children: [
                 Container(
                   margin: EdgeInsets.only(top: 8, right: 8),
+                  // width: 50,
                   child: AppText.text(
                     callDuration,
-                    fontsize: 12,
+                    fontsize: 15,
+                    textAlignment: TextAlign.end,
                   ),
                 ),
                 InkWell(

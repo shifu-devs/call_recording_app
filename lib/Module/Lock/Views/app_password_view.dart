@@ -1,13 +1,13 @@
-import 'package:call_recording_app/module/Setting/View%20Model/settings_view_model.dart';
-import 'package:call_recording_app/Utills/Customs/App%20Button/app_button.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import '../../../Utills/Customs/App Text/app_text.dart';
-import '/../Utills/App%20Theme/AppColors.dart';
-import '/../Utills/App%20Theme/app_config.dart';
-import '/../Utills/Customs/App%20Bar/my_app_bar.dart';
+import '/module/setting/view_model/settings_view_model.dart';
+import '/utills/app_theme/AppColors.dart';
+import '/utills/app_theme/app_config.dart';
+import '/utills/customs/app_bar/my_app_bar.dart';
+import '/utills/customs/app_button/app_button.dart';
+import '/utills/customs/app_text/app_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
+import 'package:get/get.dart';
 
 class AppPasswordView extends StatefulWidget {
   const AppPasswordView({Key? key}) : super(key: key);
@@ -116,92 +116,3 @@ class _AppPasswordViewState extends State<AppPasswordView> {
         ));
   }
 }
-
-// class CustomOtpTextField extends StatefulWidget {
-//   const CustomOtpTextField({
-//     super.key,
-//     required this.controller,
-//     this.isobsecure = false,
-//     this.count = 0,
-//   });
-//   final TextEditingController controller;
-//   final bool isobsecure;
-//   final int count;
-//   @override
-//   State<CustomOtpTextField> createState() => _CustomOtpTextFieldState();
-// }
-
-// class _CustomOtpTextFieldState extends State<CustomOtpTextField> {
-//   FocusNode _focus = FocusNode();
-//   bool check = false;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _focus.addListener(_onFocusChange);
-//   }
-
-//   @override
-//   void dispose() {
-//     super.dispose();
-//     _focus.removeListener(_onFocusChange);
-//     _focus.dispose();
-//   }
-
-//   void _onFocusChange() {
-//     debugPrint("Focus: ${_focus.hasFocus.toString()}");
-//     setState(() {
-//       check = _focus.hasFocus;
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Flexible(
-//       child: SizedBox(
-//         height: 60,
-//         width: 50,
-//         child: TextFormField(
-//           focusNode: _focus,
-//           onChanged: (value) {
-//             if (value.length == 1) {
-//               FocusScope.of(context).nextFocus();
-//             }
-//           },
-//           obscureText: widget.isobsecure,
-//           autofocus: true,
-//           obscuringCharacter: "\$",
-//           cursorColor: Colors.black,
-//           keyboardType: TextInputType.number,
-//           controller: widget.controller,
-//           decoration: InputDecoration(
-//             fillColor: check
-//                 ? AppColors.primaryColor().withOpacity(0.2)
-//                 : AppColors.background,
-//             filled: true,
-//             enabledBorder: OutlineInputBorder(
-//               borderRadius: BorderRadius.circular(12),
-//               borderSide: BorderSide(
-//                 color: AppColors.primaryColor(),
-//                 width: 1.5,
-//               ),
-//             ),
-//             focusedBorder: OutlineInputBorder(
-//               borderRadius: BorderRadius.circular(12),
-//               borderSide: BorderSide(
-//                 color: AppColors.primaryColor(),
-//                 width: 1.5,
-//               ),
-//             ),
-//           ),
-//           textAlign: TextAlign.center,
-//           style: const TextStyle(
-//             color: AppColors.dark,
-//             fontSize: 25,
-//             fontWeight: FontWeight.bold,
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

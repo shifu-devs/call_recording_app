@@ -1,12 +1,12 @@
-// import 'package:audioplayers/audioplayers.dart';
-import '../view_model/my_recordings_list_view_model.dart';
-import '/Utills/App%20Theme/AppColors.dart';
-import '/Utills/Customs/App%20Bar/my_app_bar.dart';
+
+import '/module/my_recordings/view_model/my_recordings_list_view_model.dart';
+import '/module/player/views/player_view.dart';
+import '/utills/app_theme/AppColors.dart';
+import '/utills/app_theme/app_config.dart';
+import '/utills/customs/app_bar/my_app_bar.dart';
+import '/utills/voice_tile/voice_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../Utills/App Theme/app_config.dart';
-import '../../../Utills/Voice Tile/voice_tile.dart';
-import '../../Player/Views/player_view.dart';
 
 class MyRecordingsView extends StatelessWidget {
   MyRecordingsView({Key? key}) : super(key: key);
@@ -26,10 +26,10 @@ class MyRecordingsView extends StatelessWidget {
           Get.back();
         },
       ),
-      body: Obx(
-        () => Container(
-          padding: EdgeInsets.only(top: AppConfig(context).height * 0.01),
-          child: ListView.builder(
+      body: Container(
+        padding: EdgeInsets.only(top: AppConfig(context).height * 0.01),
+        child: Obx(
+          () => ListView.builder(
             itemCount: _controller.listOfVoices.length,
             physics: BouncingScrollPhysics(),
             itemBuilder: (
@@ -37,9 +37,6 @@ class MyRecordingsView extends StatelessWidget {
               int index,
             ) {
               var i = _controller.listOfVoices;
-              // audioPlayer.setSourceDeviceFile(i[index].path);
-              // final vad = audioPlayer.getDuration();
-              // audioPlayer.dispose();
 
               DateTime createdAt =
                   DateTime.fromMillisecondsSinceEpoch(i[index].createdAt);
@@ -55,11 +52,14 @@ class MyRecordingsView extends StatelessWidget {
                 context: context,
                 callerName: i[index].title,
                 callDateTime: dateTime,
-                callDuration: "",
+                callDuration: _controller.durationOfVoicesList[index],
                 isFav: isFav,
                 isGoing: true,
                 isRecording: true,
-                clickFavIcon: () {},
+                clickFavIcon: () {
+                  _controller.favouriteToogle(
+                      i[index].id, i[index].isFav, index);
+                },
                 onTapTile: () {
                   Get.to(() => PlayerView(
                         source: i[index].path,

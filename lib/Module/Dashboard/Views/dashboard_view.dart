@@ -1,4 +1,4 @@
-import 'package:call_recording_app/module/Call%20Recordings/Views/all_calls_view.dart';
+import 'package:call_recording_app/module/call_recordings/views/all_calls_view.dart';
 import 'package:call_recording_app/module/Favourite/Views/favourite_view.dart';
 import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
 

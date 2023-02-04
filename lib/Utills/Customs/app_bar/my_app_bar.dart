@@ -2,7 +2,7 @@ import 'package:delayed_display/delayed_display.dart';
 import '../textfeilds.dart';
 import '/Utills/App%20Theme/AppColors.dart';
 import 'package:flutter/material.dart';
-import '../../App Theme/app_config.dart';
+import '../../app_theme/app_config.dart';
 import '../App Text/app_text.dart';
 
 class CustomAppBar {

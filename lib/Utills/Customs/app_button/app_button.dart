@@ -2,8 +2,8 @@ import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../../App Theme/app_config.dart';
-import '../App Text/app_text.dart';
+import '../../app_theme/app_config.dart';
+import '../app_text/app_text.dart';
 
 class Appbutton {
   primaryButton({

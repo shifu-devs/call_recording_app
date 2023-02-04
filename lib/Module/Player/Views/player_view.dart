@@ -1,15 +1,11 @@
-// import 'dart:js_util';
 
 import 'dart:io';
-
 import 'package:audioplayers/audioplayers.dart';
-import 'package:call_recording_app/module/Player/Components/audio_player.dart';
-import 'package:call_recording_app/module/Player/Components/file_detail_card.dart';
-// import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
-import 'package:call_recording_app/Utills/App%20Theme/app_config.dart';
-import 'package:call_recording_app/Utills/Customs/App%20Bar/my_app_bar.dart';
+import '/module/player/components/audio_player.dart';
+import '/module/player/components/file_detail_card.dart';
+import '/utills/app_theme/app_config.dart';
+import '/utills/customs/app_bar/my_app_bar.dart';
 import 'package:delayed_display/delayed_display.dart';
-// import 'package:call_recording_app/Utills/Customs/App%20Text/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,7 +35,7 @@ class PlayerView extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar().simpleAppBar(
         context: context,
-        title: "Jabran Haider",
+        title: fileName,
         textColor: Colors.white,
         isBackButton: true,
         backOnPressed: () async {

@@ -1,8 +1,8 @@
-import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
-import 'package:call_recording_app/Utills/Customs/App%20Text/app_text.dart';
+import '/utills/app_theme/AppColors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import '../app_text/app_text.dart';
 
 class ToastMessage {
   static toast({String message = "Message"}) {

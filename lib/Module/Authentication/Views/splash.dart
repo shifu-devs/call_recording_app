@@ -1,6 +1,6 @@
 import 'dart:async';
 import '/app_services/local_data_saver.dart';
-import '/module/Dashboard/Views/dashboard_view.dart';
+import '../../dashboard/views/dashboard_view.dart';
 import '/module/Lock/Views/lock_view.dart';
 import '/Utills/App%20Theme/AppColors.dart';
 import 'package:delayed_display/delayed_display.dart';

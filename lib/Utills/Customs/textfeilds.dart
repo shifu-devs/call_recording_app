@@ -1,11 +1,8 @@
-// import 'package:events_delegated_management_system/Utills/Theme/color.dart';
-import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
+
+import '/utills/app_theme/AppColors.dart';
+import '/utills/app_theme/app_config.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../App Theme/app_config.dart';
-
-// import '../../Theme/app_config.dart';
 
 class AppTextFormFiled extends StatefulWidget {
   final String text;

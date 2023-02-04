@@ -1,14 +1,12 @@
-import 'package:call_recording_app/Utills/Customs/App%20Text/app_text.dart';
-import 'package:call_recording_app/module/my_recordings/views/my_recordings_view.dart';
-
-import '/Utills/App%20Theme/AppColors.dart';
-import '/Utills/App%20Theme/app_config.dart';
-import '/Utills/Customs/App%20Bar/my_app_bar.dart';
+import '/module/my_recordings/views/my_recordings_view.dart';
+import '/module/voice_recorder/components/my_voice_recorder.dart';
+import '/module/voice_recorder/view_model/voice_recording_view_model.dart';
 import '/module/voice_recorder/views/action_voice_recording_view.dart';
-
-import '../view_model/voice_recording_view_model.dart';
+import '/utills/app_theme/AppColors.dart';
+import '/utills/app_theme/app_config.dart';
+import '/utills/customs/app_bar/my_app_bar.dart';
+import '/utills/customs/app_text/app_text.dart';
 import 'package:get/get.dart';
-import '../components/my_voice_recorder.dart';
 import 'package:flutter/material.dart';
 
 ///// view /////
@@ -21,11 +19,12 @@ class VoiceRecorderView extends StatelessWidget {
     return Obx(() => Scaffold(
           backgroundColor: AppColors.primaryColor().withOpacity(0.3),
           appBar: CustomAppBar().simpleAppBar(
-            context: context,
-            title: "Start Recording",
-            isCenterTitle: true,
-            textColor: AppColors.background,
-          ),
+              context: context,
+              title: "Start Recording",
+              isCenterTitle: true,
+              textColor: AppColors.background,
+              backOnPressed: () => Get.back(),
+              isBackButton: true,),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

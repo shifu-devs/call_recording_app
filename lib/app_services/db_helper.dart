@@ -5,8 +5,8 @@ class DbHelper {
   static Database? _db;
   static int itemsMyRecorings = 0;
 
-  static const String _myRecordingTableName = "MyRecordings";
-  static const String _myCallsTableName = "MyRecordings";
+  static const String myRecordingTableName = "MyRecordings";
+  static const String myCallsTableName = "MyRecordings";
 
   static String tableMyRecordings =
       "CREATE TABLE IF NOT EXISTS MyRecordings(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, createdAt TEXT, isFavourite INTEGER, path TEXT)";
@@ -28,7 +28,7 @@ class DbHelper {
 
   static Future<void> insertMyRecording(Map<String, Object> data) async {
     Database db = await DbHelper.dbConnection() as Database;
-    await db.insert(_myRecordingTableName, data).whenComplete(() {
+    await db.insert(myRecordingTableName, data).whenComplete(() {
       // print(data.toString());
     });
   }
@@ -36,7 +36,7 @@ class DbHelper {
   static Future<List<Map<String, Object?>>> getMyRecordings() async {
     Database db = await DbHelper.dbConnection() as Database;
     return await db.query(
-      _myRecordingTableName,
+      myRecordingTableName,
       orderBy: "id DESC",
     );
   }
@@ -65,8 +65,9 @@ class DbHelper {
   //   return isDone;
   // }
 
-  static Future<bool> deleteMyRecording(String id) async {
-    String query = "DELETE FROM $_myRecordingTableName WHERE id=$id";
+  static Future<bool> deleteVoice(
+      {required String tableName, required String id}) async {
+    String query = "DELETE FROM $tableName WHERE id=$id";
     bool isDone = false;
     Database db = await DbHelper.dbConnection() as Database;
     await db.rawDelete(query).whenComplete(() {
@@ -75,20 +76,22 @@ class DbHelper {
     return isDone;
   }
 
-  // static Future<bool> decrementItemPrice(
-  //     String id, int quantity, String total) async {
-  //   String query =
-  //       "UPDATE CartItems SET quantity=$quantity , total=$total WHERE id=$id";
-  //   bool isDone = false;
-  //   Database db = await DbHelper.dbConnection() as Database;
-  //   await db.rawUpdate(query).whenComplete(() {
-  //     isDone = true;
-  //   });
-  //   return isDone;
-  // }
+  static Future<bool> toggleFavVoice(
+      {required String tableName,
+      required String id,
+      required bool val}) async {
+    String isFav = val ? "1" : "0";
+   
+    String query = "UPDATE $tableName SET isFavourite = $isFav WHERE id=$id";
 
-  static Future<int> countMyRecordings() async {
-    String query = "SELECT COUNT (*) from $_myRecordingTableName";
+    bool isDone = false;
+    Database db = await DbHelper.dbConnection() as Database;
+    await db.execute(query);
+    return isDone;
+  }
+
+  static Future<int> countVoices(String tableName) async {
+    String query = "SELECT COUNT (*) from $tableName";
     try {
       Database db = await DbHelper.dbConnection() as Database;
       var x = await db.rawQuery(query);
@@ -99,29 +102,4 @@ class DbHelper {
     }
     return itemsMyRecorings;
   }
-
-  // static Future<double> calculateSubtotal() async {
-  //   String query = "SELECT SUM(total) as SUBTOTAL FROM CartItems";
-  //   Database db = await DbHelper.dbConnection() as Database;
-  //   var x = await db.rawQuery(query);
-  //   try {
-  //     subtotalCart = double.parse(x[0]["SUBTOTAL"].toString());
-  //   } catch (e) {
-  //     subtotalCart = 0;
-  //   }
-  //   return subtotalCart;
-  // }
-
-  // static Future<int> getQtyItemCarted(String docId) async {
-  //   String query = "SELECT quantity FROM CartItems WHERE docid=$docId";
-  //   int qty;
-  //   Database db = await DbHelper.dbConnection() as Database;
-  //   var x = await db.rawQuery(query);
-  //   try {
-  //     qty = int.parse(x[0]["quantity"].toString());
-  //   } catch (e) {
-  //     qty = 0;
-  //   }
-  //   return qty;
-  // }
 }

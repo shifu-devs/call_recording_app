@@ -1,16 +1,13 @@
-import 'package:call_recording_app/module/Authentication/Views/signup_view.dart';
-import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
+import '/module/authentication/views/forget_password_view.dart';
+import '/module/authentication/views/signup_view.dart';
+import '/utills/customs/app_button/app_button.dart';
+import '/utills/app_theme/AppColors.dart';
+import '/utills/app_theme/app_config.dart';
+import '/utills/customs/app_text/app_text.dart';
+import '/utills/customs/textfeilds.dart';
 import 'package:delayed_display/delayed_display.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../Utills/App Theme/app_config.dart';
-import '../../../Utills/Customs/App Button/app_button.dart';
-import '../../../Utills/Customs/App Text/app_text.dart';
-import '../../../Utills/Customs/textfeilds.dart';
-// import '../../Dashboard/Views/Dashboard.dart';
-import 'forget_password_view.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);

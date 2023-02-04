@@ -1,16 +1,13 @@
-import '/../Module/Call%20Recordings/View%20Model/call_recording_controller.dart';
-import '/../Module/Filters/Views/filter_view.dart';
-import '/../Utills/Customs/Drawer/app_drawer.dart';
-import '/../Utills/Voice%20Tile/voice_tile.dart';
-// import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
-import '/../Utills/App%20Theme/app_config.dart';
-import '/../Utills/Customs/App%20Bar/my_app_bar.dart';
-import 'package:delayed_display/delayed_display.dart';
 
+import '/module/call_recordings/view_model/call_recording_controller.dart';
+import '/module/filters/views/filter_view.dart';
+import '/module/player/views/player_view.dart';
+import '/utills/customs/app_bar/my_app_bar.dart';
+import '/utills/app_theme/app_config.dart';
+import '/utills/customs/drawer/app_drawer.dart';
+import '/utills/voice_tile/voice_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../Player/Views/player_view.dart';
 
 class AllCallsView extends StatelessWidget {
   String screenName;
@@ -72,7 +69,7 @@ class AllCallsView extends StatelessWidget {
                   //     !(i[index].isFav.obs.value);
                   // _voiceController.myval.value =
                   //     !(_voiceController.myval.value);
-                  print("val = ${i[index].isFav.obs.value}");
+                  // print("val = ${i[index].isFav.obs.value}");
                 },
                 onTapTile: () {
                   print("grt.to Play voice note");

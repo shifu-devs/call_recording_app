@@ -1,14 +1,14 @@
-import 'package:call_recording_app/module/Authentication/views/login_view.dart';
-import 'package:call_recording_app/module/Setting/Views/settings_view.dart';
-import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
-import 'package:call_recording_app/Utills/App%20Theme/app_config.dart';
-import 'package:call_recording_app/Utills/Customs/App%20Text/app_text.dart';
-import 'package:call_recording_app/Utills/Customs/Drawer/Components/drawer_tile.dart';
+import '/utills/app_theme/AppColors.dart';
+import '/module/Authentication/views/login_view.dart';
+import '/module/Setting/Views/settings_view.dart';
+import '/module/my_recordings/views/my_recordings_view.dart';
+import '/utills/app_theme/app_config.dart';
+import '/utills/customs/app_text/app_text.dart';
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../module/voice_recorder/Views/voice_recoreder_view.dart';
+import 'components/drawer_tile.dart';
 
 class AppDrawer {
   drawer({required BuildContext context, required Function tilePressed}) {
@@ -54,6 +54,15 @@ class AppDrawer {
                 tilePressed();
               },
             ),
+            DrawerTile().tile(
+              context: context,
+              icon: Icons.my_library_music_sharp,
+              tileName: "Voice Recordings",
+              onPressed: () {
+                Get.to(() => MyRecordingsView());
+                tilePressed();
+              },
+            ),
             const SizedBox(
               height: 5,
             ),
@@ -75,7 +84,12 @@ class AppDrawer {
             DrawerTile().tile(
               context: context,
               icon: Icons.share,
-              tileName: "Share this app",
+              tileName: "Share app",
+            ),
+            DrawerTile().tile(
+              context: context,
+              icon: Icons.star_half_rounded,
+              tileName: "Rate app",
             ),
           ],
         ));

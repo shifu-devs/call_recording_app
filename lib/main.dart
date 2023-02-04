@@ -1,13 +1,10 @@
 import 'dart:io';
-
-import 'package:call_recording_app/module/Dashboard/Views/dashboard_view.dart';
-import 'package:permission_handler/permission_handler.dart';
-
-import '/Utills/App%20Theme/theme_const.dart';
-import '/Utills/App%20Theme/theme_manager.dart';
-import 'module/Authentication/Views/splash.dart';
+import '/module/dashboard/views/dashboard_view.dart';
+import '/utills/app_theme/theme_const.dart';
+import '/utills/app_theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(const MyApp());

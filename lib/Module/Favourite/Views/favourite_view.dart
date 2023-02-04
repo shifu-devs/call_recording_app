@@ -1,15 +1,11 @@
-import 'package:call_recording_app/Utills/Voice%20Tile/voice_tile.dart';
-// import 'package:call_recording_app/Utills/App%20Theme/AppColors.dart';
-import 'package:call_recording_app/Utills/App%20Theme/app_config.dart';
-import 'package:call_recording_app/Utills/Customs/App%20Bar/my_app_bar.dart';
-// import 'package:call_recording_app/Utills/Customs/App%20Text/app_text.dart';
-// import 'package:flutter/cupertino.dart';
+import '/module/filters/views/filter_view.dart';
+import '/module/player/views/player_view.dart';
+import '/utills/app_theme/app_config.dart';
+import '/utills/customs/app_bar/my_app_bar.dart';
+import '/utills/customs/drawer/app_drawer.dart';
+import '/utills/voice_tile/voice_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../Utills/Customs/Drawer/app_drawer.dart';
-import '../../Filters/Views/filter_view.dart';
-import '../../Player/Views/player_view.dart';
 
 class Voices {
   String callerName;

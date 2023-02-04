@@ -1,12 +1,11 @@
-import 'package:call_recording_app/module/Lock/Views/app_password_view.dart';
-import 'package:call_recording_app/module/Setting/View%20Model/settings_view_model.dart';
+import '/module/lock/views/app_password_view.dart';
+import '/module/setting/view_model/settings_view_model.dart';
+import '/module/setting/views/settings_audio_source_view.dart';
+import '/utills/app_theme/AppColors.dart';
+import '/utills/app_theme/app_config.dart';
+import '/utills/customs/app_bar/my_app_bar.dart';
+import '/utills/customs/drawer/components/drawer_tile.dart';
 import 'package:flutter/cupertino.dart';
-import '/../Module/Setting/Views/settings_audio_source_view.dart';
-import '/../Utills/App%20Theme/AppColors.dart';
-import '/../Utills/App%20Theme/app_config.dart';
-import '/../Utills/Customs/App%20Bar/my_app_bar.dart';
-import '/../Utills/Customs/Drawer/Components/drawer_tile.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

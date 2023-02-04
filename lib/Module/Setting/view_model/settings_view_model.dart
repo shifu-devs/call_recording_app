@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:call_recording_app/app_services/local_data_saver.dart';
-import 'package:call_recording_app/module/Dashboard/Views/dashboard_view.dart';
+import 'package:call_recording_app/module/dashboard/views/dashboard_view.dart';
 import 'package:call_recording_app/Utills/Customs/App%20Message/toast_message.dart';
 import 'package:get/get.dart';
 
