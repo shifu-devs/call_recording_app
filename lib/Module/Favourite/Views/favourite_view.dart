@@ -118,7 +118,7 @@ class _FavouriteViewState extends State<FavouriteView> {
                   },
                   onTapTile: () {
                     print("grt.to Play voice note");
-                    Get.to(() => PlayerView());
+                    // Get.to(() => PlayerView());
                     // Navigator.push(context,
                     //     MaterialPageRoute(builder: (context) => PlayerView()));
                   }),

@@ -1,6 +1,7 @@
-
 import 'dart:io';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:call_recording_app/module/player/view_model/player_controller.dart';
+import '/module/voice_recorder/model/voice_recorder_model.dart';
 import '/module/player/components/audio_player.dart';
 import '/module/player/components/file_detail_card.dart';
 import '/utills/app_theme/app_config.dart';
@@ -10,17 +11,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PlayerView extends StatelessWidget {
-  String source;
-  String fileName;
+  MyRecordingRead data;
 
-  PlayerView({this.source = "", this.fileName = "", Key? key})
-      : super(key: key);
+  PlayerView({required this.data, Key? key}) : super(key: key);
+  final _controller = Get.put(PlayerController());
 
   final audioPlayer = AudioPlayer();
 
   @override
   Widget build(BuildContext context) {
-    File file = File(source);
+    _controller.isFavourite.value = data.isFav == "1" ? true : false;
+    File file = File(data.path);
     FileStat fileStat = file.statSync();
     int fileSize = fileStat.size;
     double fileSizeMB = fileSize / (1024 * 1024);
@@ -32,54 +33,71 @@ class PlayerView extends StatelessWidget {
       realSize = fileSizeMB.toStringAsFixed(2) + " MB";
     }
 
-    return Scaffold(
-      appBar: CustomAppBar().simpleAppBar(
-        context: context,
-        title: fileName,
-        textColor: Colors.white,
-        isBackButton: true,
-        backOnPressed: () async {
-          await audioPlayer.stop();
-          await audioPlayer.dispose();
-          Get.back();
-        },
-        isCenterTitle: true,
-        isPlayer: true,
-        delteIconPressed: () {},
-        shareIconPressed: () {},
-        starIconPressed: () {},
-      ),
-      body: ListView(
-        children: [
-          DelayedDisplay(
-            delay: Duration(milliseconds: 200),
-            child: FileDetailCard().fileDetails(
+    return Obx(() => WillPopScope(
+          onWillPop: () async {
+            Navigator.pop(context, data);
+            return true;
+          },
+          child: Scaffold(
+            appBar: CustomAppBar().simpleAppBar(
               context: context,
-              fileLocation: source != ""
-                  ? source.substring(19)
-                  : "sdcard/CallRecordings/62_55_6asda_asd_song_asdbs_asdbhbhaxhabs.mps",
-              fileName: fileName != ""
-                  ? fileName
-                  : "62_55_6asda_asd_song_asdbs_asdbhbhaxhabs.mps",
-              fileSize: realSize,
+              title: "Player",
+              textColor: Colors.white,
+              isBackButton: true,
+              backOnPressed: () async {
+                await audioPlayer.stop();
+                await audioPlayer.dispose();
+                Get.back(result: data);
+              },
+              isCenterTitle: false,
+              favIconData: _controller.isFavourite.value
+                  ? Icons.favorite_rounded
+                  : Icons.favorite_border_rounded,
+              isPlayer: true,
+              delteIconPressed: () {
+                print(data.isFav);
+              },
+              shareIconPressed: () {
+                print(data.id);
+              },
+              favIconPressed: () async {
+                _controller.isFavourite.value =
+                    await _controller.toogleFavourite(
+                  data.id,
+                  data.isFav,
+                );
+                data.isFav = _controller.isFavourite.value ? "1" : "0";
+                print(data.isFav);
+              },
+            ),
+            body: ListView(
+              children: [
+                DelayedDisplay(
+                  delay: Duration(milliseconds: 200),
+                  child: FileDetailCard().fileDetails(
+                    context: context,
+                    fileLocation: data.path.substring(19),
+                    fileName: data.title,
+                    fileSize: realSize,
+                  ),
+                ),
+                SizedBox(
+                  height: AppConfig(context).height / 60,
+                ),
+                Container(
+                  margin: EdgeInsets.all(AppConfig(context).width / 35),
+                  // padding: EdgeInsets.symmetric(horizontal: 25),
+                  height: AppConfig(context).height / 4.5,
+                  // color: Colors.red,
+                  child: DelayedDisplay(
+                    delay: Duration(milliseconds: 300),
+                    child: MyAudioPlayer(
+                        audioPlayer: audioPlayer, sourcePath: data.path),
+                  ),
+                ),
+              ],
             ),
           ),
-          SizedBox(
-            height: AppConfig(context).height / 60,
-          ),
-          Container(
-            margin: EdgeInsets.all(AppConfig(context).width / 35),
-            // padding: EdgeInsets.symmetric(horizontal: 25),
-            height: AppConfig(context).height / 4.5,
-            // color: Colors.red,
-            child: DelayedDisplay(
-              delay: Duration(milliseconds: 300),
-              child:
-                  MyAudioPlayer(audioPlayer: audioPlayer, sourcePath: source),
-            ),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }

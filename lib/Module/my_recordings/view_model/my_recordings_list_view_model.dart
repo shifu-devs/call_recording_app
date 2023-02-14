@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:call_recording_app/app_services/db_helper.dart';
-import 'package:call_recording_app/module/voice_recorder/model/voice_recorder_model.dart';
+import '/app_services/db_helper.dart';
+import '/module/voice_recorder/model/voice_recorder_model.dart';
 import 'package:get/get.dart';
 
 class MyRecordingsListViewModel extends GetxController {
@@ -77,5 +77,14 @@ class MyRecordingsListViewModel extends GetxController {
     listOfVoices.clear();
     durationOfVoicesList.clear();
     await loadRecoringsFromData();
+  }
+
+  deleteRecording(int index) async {
+    File file = File(listOfVoices[index].path); // replace with your file path
+    await file.delete().then((value) => print('File deleted successfully!'));
+    await DbHelper.deleteVoice(
+      tableName: DbHelper.myRecordingTableName,
+      id: listOfVoices[index].id,
+    );
   }
 }

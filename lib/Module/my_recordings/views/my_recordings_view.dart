@@ -1,3 +1,6 @@
+import 'package:call_recording_app/module/voice_recorder/model/voice_recorder_model.dart';
+import 'package:call_recording_app/utills/customs/app_message/toast_message.dart';
+import 'package:call_recording_app/utills/customs/app_text/app_text.dart';
 
 import '/module/my_recordings/view_model/my_recordings_list_view_model.dart';
 import '/module/player/views/player_view.dart';
@@ -37,7 +40,7 @@ class MyRecordingsView extends StatelessWidget {
               int index,
             ) {
               var i = _controller.listOfVoices;
-
+              // print(i[index].createdAt.toString());
               DateTime createdAt =
                   DateTime.fromMillisecondsSinceEpoch(i[index].createdAt);
               final hour = createdAt.hour.toString();
@@ -48,25 +51,59 @@ class MyRecordingsView extends StatelessWidget {
               final year = createdAt.year.toString();
               final dateTime = "$year/$month/$day $hour:$mint:$sec";
               bool isFav = i[index].isFav.toString() == "1" ? true : false;
-              return VoiceTile().allCallsTile(
-                context: context,
-                callerName: i[index].title,
-                callDateTime: dateTime,
-                callDuration: _controller.durationOfVoicesList[index],
-                isFav: isFav,
-                isGoing: true,
-                isRecording: true,
-                clickFavIcon: () {
-                  _controller.favouriteToogle(
-                      i[index].id, i[index].isFav, index);
-                },
-                onTapTile: () {
-                  Get.to(() => PlayerView(
-                        source: i[index].path,
-                        fileName: i[index].title,
-                      ));
-                },
-              );
+              return Dismissible(
+                  key: UniqueKey(),
+                  onDismissed: (direction) {
+                    _controller.deleteRecording(index);
+                  },
+                  confirmDismiss: (direction) async {
+                    bool val = false;
+
+                    await ToastMessage().defaultYesNoDialouge(
+                      "Are you sure to delete '${i[index].title}' recording. Changes in database is permanent.",
+                      onConfirmPressed: () {
+                        val = true;
+                        Get.back();
+                        _controller.listOfVoices.removeAt(index);
+                      },
+                      onCancelPressed: () {
+                        val = false;
+                        Get.back();
+                      },
+                    );
+                    return val;
+                  },
+                  background: Container(
+                    color: Colors.red,
+                    child: const Center(
+                      child: Icon(
+                        Icons.delete,
+                        color: Colors.white,
+                        size: 35,
+                      ),
+                    ),
+                  ),
+                  child: VoiceTile().allCallsTile(
+                    context: context,
+                    callerName: i[index].title,
+                    callDateTime: dateTime,
+                    callDuration: _controller.durationOfVoicesList[index],
+                    isFav: isFav,
+                    isGoing: true,
+                    isRecording: true,
+                    clickFavIcon: () {
+                      _controller.favouriteToogle(
+                        i[index].id,
+                        i[index].isFav,
+                        index,
+                      );
+                    },
+                    onTapTile: () async {
+                      i[index] = await Get.to(() => PlayerView(
+                            data: i[index],
+                          ));
+                    },
+                  ));
             },
           ),
         ),

@@ -17,10 +17,11 @@ class CustomAppBar {
     GestureTapCallback? filterPressed,
     GestureTapCallback? delteIconPressed,
     GestureTapCallback? shareIconPressed,
-    GestureTapCallback? starIconPressed,
+    GestureTapCallback? favIconPressed,
     GestureTapCallback? drawerButtonPressed,
     bool isDrawer = false,
     bool isPlayer = false,
+    IconData favIconData = Icons.favorite,
   }) {
     return AppBar(
       title: AppText.text(
@@ -68,9 +69,9 @@ class CustomAppBar {
             : const SizedBox(),
         isPlayer
             ? IconButton(
-                onPressed: starIconPressed,
-                icon: const Icon(
-                  Icons.favorite,
+                onPressed: favIconPressed,
+                icon: Icon(
+                  favIconData,
                   color: AppColors.background,
                 ),
               )

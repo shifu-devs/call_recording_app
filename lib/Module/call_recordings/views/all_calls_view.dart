@@ -73,7 +73,7 @@ class AllCallsView extends StatelessWidget {
                 },
                 onTapTile: () {
                   print("grt.to Play voice note");
-                  Get.to(() => PlayerView());
+                  // Get.to(() => PlayerView());
                   // Navigator.push(context,
                   //     MaterialPageRoute(builder: (context) => PlayerView()));
                 }));
