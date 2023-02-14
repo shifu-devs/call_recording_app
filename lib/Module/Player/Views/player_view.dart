@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:call_recording_app/module/player/view_model/player_controller.dart';
+import 'package:call_recording_app/utills/customs/app_message/toast_message.dart';
 import '/module/voice_recorder/model/voice_recorder_model.dart';
 import '/module/player/components/audio_player.dart';
 import '/module/player/components/file_detail_card.dart';
@@ -35,7 +36,7 @@ class PlayerView extends StatelessWidget {
 
     return Obx(() => WillPopScope(
           onWillPop: () async {
-            Navigator.pop(context, data);
+            Navigator.pop(context, {'data': data, 'isDel': false});
             return true;
           },
           child: Scaffold(
@@ -47,15 +48,33 @@ class PlayerView extends StatelessWidget {
               backOnPressed: () async {
                 await audioPlayer.stop();
                 await audioPlayer.dispose();
-                Get.back(result: data);
+                Get.back(result: {'data': data, 'isDel': false});
               },
               isCenterTitle: false,
               favIconData: _controller.isFavourite.value
                   ? Icons.favorite_rounded
                   : Icons.favorite_border_rounded,
               isPlayer: true,
-              delteIconPressed: () {
-                print(data.isFav);
+              delteIconPressed: () async {
+                bool val = false;
+                await ToastMessage().defaultYesNoDialouge(
+                  "Are you sure to delete '${data.title}' recording. Changes in database is permanent.",
+                  onConfirmPressed: () {
+                    val = true;
+                    Get.back();
+                  },
+                  onCancelPressed: () {
+                    val = false;
+                    Get.back();
+                  },
+                );
+                if (val) {
+                  await audioPlayer.stop();
+                  await audioPlayer.dispose();
+                  if (await _controller.deleteRecording(data)) {
+                    Get.back(result: {'data': data, 'isDel': true});
+                  }
+                }
               },
               shareIconPressed: () {
                 print(data.id);

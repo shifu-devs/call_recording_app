@@ -1,26 +1,30 @@
+import 'dart:async';
+
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../../utills/flutter_pin_code.dart';
 import '/module/setting/view_model/settings_view_model.dart';
 import '/utills/customs/app_button/app_button.dart';
 import '/utills/customs/app_text/app_text.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_verification_code/flutter_verification_code.dart';
 import 'package:spring/spring.dart';
 import '/utills/app_theme/AppColors.dart';
 import '/utills/app_theme/app_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class EnterPinView extends StatefulWidget {
-  const EnterPinView({Key? key}) : super(key: key);
+class EnterPinView extends StatelessWidget {
+  EnterPinView({Key? key}) : super(key: key);
 
-  @override
-  State<EnterPinView> createState() => _EnterPinViewState();
-}
-
-class _EnterPinViewState extends State<EnterPinView> {
   final _controller = Get.put(SettingsViewModel());
 
   bool _onEditing = true;
+
   String _code = "";
+
+  TextEditingController newTextEditingController = TextEditingController();
+
+  FocusNode focusNode = FocusNode();
 
   final SpringController springController =
       SpringController(initialAnim: Motion.play);
@@ -57,46 +61,32 @@ class _EnterPinViewState extends State<EnterPinView> {
                   animStatus: (AnimStatus status) {
                     print(status);
                   },
-                  child: VerificationCode(
-                    fullBorder: true,
-                    textStyle: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.primaryColor()),
-                    keyboardType: TextInputType.number,
-                    underlineColor: AppColors
-                        .primaryColor(), // If this is null it will use primaryColor: Colors.red from Theme
+                  child: PinCodeFields(
                     length: 4,
-                    cursorColor: AppColors
-                        .primaryColor(), // If this is null it will default to the ambient
-                    // clearAll is NOT required, you can delete it
-                    // takes any widget, so you can implement your design
-                    clearAll: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'clear all',
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          color: AppColors.dark,
-                        ),
-                      ),
+                    autofocus: true,
+                    controller: newTextEditingController,
+                    focusNode: focusNode,
+                    keyboardType: TextInputType.number,
+                    animationDuration: Duration(milliseconds: 350),
+                    animation: Animations.slideInDown,
+                    animationCurve: Curves.linear,
+                    textStyle: GoogleFonts.poppins(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.primaryColor(),
                     ),
-                    margin: const EdgeInsets.all(12),
-                    onCompleted: (String value) async {
-                      // setState(() {
+                    onChange: (value) {
                       _code = value;
-                      // });
+                    },
+                    onComplete: (result) async {
+                      // Your logic with code
+                      _code = result;
                       if (_code.length == 4) {
-                        if (await _controller.checkEnterdPin(_code)) {
-                          if (!_onEditing) FocusScope.of(context).unfocus();
-                        }
+                        await _controller.checkEnterdPin(_code);
                       }
                     },
-                    onEditing: (bool value) {
-                      // setState(() {
-                      _onEditing = value;
-                      // });
-                    },
+                    activeBorderColor: Colors.orange,
+                    borderColor: AppColors.primaryColor(),
                   ),
                 ),
                 SizedBox(
@@ -120,10 +110,12 @@ class _EnterPinViewState extends State<EnterPinView> {
                         fontsize: 18,
                         callback: () {
                           if (_code != "") {
-                            _controller.checkEnterdPin(_code);
+                            Timer(Duration(milliseconds: 800), () {
+                              _controller.checkEnterdPin(_code);
+                            });
                           } else {
                             springController.play(
-                              animDuration: Duration(milliseconds: 500),
+                              animDuration: Duration(milliseconds: 50),
                             );
                           }
                         })

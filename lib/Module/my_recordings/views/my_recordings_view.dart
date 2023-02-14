@@ -99,9 +99,15 @@ class MyRecordingsView extends StatelessWidget {
                       );
                     },
                     onTapTile: () async {
-                      i[index] = await Get.to(() => PlayerView(
+                      final result = await Get.to(() => PlayerView(
                             data: i[index],
                           ));
+                      if (result['isDel']) {
+                        i.remove(result['data']);
+                        _controller.listOfVoices.remove(result['data']);
+                      } else {
+                        i[index] = result['data'];
+                      }
                     },
                   ));
             },

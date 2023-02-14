@@ -1,3 +1,6 @@
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../../utills/flutter_pin_code.dart';
 import '/module/setting/view_model/settings_view_model.dart';
 import '/utills/app_theme/AppColors.dart';
 import '/utills/app_theme/app_config.dart';
@@ -6,20 +9,19 @@ import '/utills/customs/app_button/app_button.dart';
 import '/utills/customs/app_text/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_verification_code/flutter_verification_code.dart';
 import 'package:get/get.dart';
 
-class AppPasswordView extends StatefulWidget {
-  const AppPasswordView({Key? key}) : super(key: key);
+class AppPasswordView extends StatelessWidget {
+  AppPasswordView({Key? key}) : super(key: key);
+  TextEditingController newTextEditingController = TextEditingController();
 
-  @override
-  State<AppPasswordView> createState() => _AppPasswordViewState();
-}
-
-class _AppPasswordViewState extends State<AppPasswordView> {
+  FocusNode focusNode = FocusNode();
   final _controller = Get.find<SettingsViewModel>();
+
   bool _onEditing = true;
+
   String _code = "";
+
   @override
   Widget build(BuildContext context) {
     final hight = AppConfig(context).height;
@@ -51,42 +53,29 @@ class _AppPasswordViewState extends State<AppPasswordView> {
                     color: AppColors.primaryColor(),
                   ),
                 ),
-                VerificationCode(
-                  fullBorder: true,
-                  textStyle: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.primaryColor()),
-                  keyboardType: TextInputType.number,
-                  underlineColor: AppColors
-                      .primaryColor(), // If this is null it will use primaryColor: Colors.red from Theme
+                PinCodeFields(
                   length: 4,
-                  cursorColor: AppColors
-                      .primaryColor(), // If this is null it will default to the ambient
-                  // clearAll is NOT required, you can delete it
-                  // takes any widget, so you can implement your design
-                  clearAll: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      'clear all',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        color: AppColors.dark,
-                      ),
-                    ),
+                  autofocus: true,
+                  controller: newTextEditingController,
+                  focusNode: focusNode,
+                  keyboardType: TextInputType.number,
+                  animationDuration: Duration(milliseconds: 350),
+                  animation: Animations.slideInDown,
+                  animationCurve: Curves.linear,
+                  textStyle: GoogleFonts.poppins(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.primaryColor(),
                   ),
-                  margin: const EdgeInsets.all(12),
-                  onCompleted: (String value) {
-                    setState(() {
-                      _code = value;
-                    });
+                  onChange: (value) {
+                    _code = value;
                   },
-                  onEditing: (bool value) {
-                    setState(() {
-                      _onEditing = value;
-                    });
-                    if (!_onEditing) FocusScope.of(context).unfocus();
+                  onComplete: (result) async {
+                    // Your logic with code
+                    _code = result;
                   },
+                  activeBorderColor: Colors.orange,
+                  borderColor: AppColors.primaryColor(),
                 ),
                 SizedBox(
                   height: hight * 0.10,
