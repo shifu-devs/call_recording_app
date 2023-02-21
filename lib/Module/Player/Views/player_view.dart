@@ -77,7 +77,7 @@ class PlayerView extends StatelessWidget {
                 }
               },
               shareIconPressed: () {
-                print(data.id);
+                _controller.shareFile(data.path, data.title);
               },
               favIconPressed: () async {
                 _controller.isFavourite.value =

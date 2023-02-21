@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/material.dart';
 import '/app_services/db_helper.dart';
 import '/module/voice_recorder/model/voice_recorder_model.dart';
 import 'package:get/get.dart';
@@ -87,4 +88,8 @@ class MyRecordingsListViewModel extends GetxController {
       id: listOfVoices[index].id,
     );
   }
+
+  ////  searching module
+  RxBool isSearch = false.obs;
+  final searchingTextField = TextEditingController().obs;
 }

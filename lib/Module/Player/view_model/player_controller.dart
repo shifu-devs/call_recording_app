@@ -1,8 +1,7 @@
 import 'dart:io';
-
-import 'package:call_recording_app/module/voice_recorder/model/voice_recorder_model.dart';
+import '/module/voice_recorder/model/voice_recorder_model.dart';
 import 'package:get/get.dart';
-
+import 'package:share_plus/share_plus.dart';
 import '../../../app_services/db_helper.dart';
 
 class PlayerController extends GetxController {
@@ -23,5 +22,9 @@ class PlayerController extends GetxController {
       id: data.id,
     );
     return true;
+  }
+
+  Future<void> shareFile(String filePath, String title) async {
+    await Share.shareFiles([filePath], text: title);
   }
 }

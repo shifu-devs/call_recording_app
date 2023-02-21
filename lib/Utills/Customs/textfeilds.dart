@@ -1,4 +1,3 @@
-
 import '/utills/app_theme/AppColors.dart';
 import '/utills/app_theme/app_config.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +16,18 @@ class AppTextFormFiled extends StatefulWidget {
   final bool readOnly;
   final GestureTapCallback? onTextFieldClick;
   final FontWeight? fontweight;
-
+  final Color? cursorColor;
+  final Color? textColor;
+  Function? onChange;
   TextEditingController? controller;
   AppTextFormFiled(
       {Key? key,
       this.width = 0,
+      this.cursorColor = Colors.black,
+      this.textColor = Colors.black,
       this.isPassword = false,
       this.isNumber = false,
+      this.onChange,
       this.text = "  example@gmail.com",
       this.textSize = 15,
       this.height = 0,
@@ -58,21 +62,28 @@ class _AppTextFormFiledState extends State<AppTextFormFiled> {
       readOnly: widget.readOnly,
       validator: widget.validation as String? Function(String?)?,
       obscureText: isObscure,
-      cursorColor: Colors.black,
+      cursorColor: widget.cursorColor,
+      onChanged: (value) {
+        try {
+          widget.onChange!(value);
+        } catch (e) {}
+      },
       style: GoogleFonts.poppins(
-        color: Colors.black,
+        color: widget.textColor,
         fontWeight: widget.fontweight,
         fontSize: widget.textSize,
       ),
       controller: widget.cntr,
       keyboardType: widget.keyboardtype,
       decoration: InputDecoration(
-        border:  UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.primaryColor(),
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.primaryColor(),
           ),
         ),
-        focusedBorder:  UnderlineInputBorder(
-            borderSide: BorderSide(color: AppColors.primaryColor(),
+        focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+          color: AppColors.primaryColor(),
         )),
 
         suffixIcon: widget.isPassword
@@ -145,7 +156,7 @@ class AppTextFeild {
           return null;
         },
         decoration: InputDecoration(
-          focusedBorder:  OutlineInputBorder(
+          focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.transparent),
             borderRadius: BorderRadius.all(
               Radius.circular(13.0),
