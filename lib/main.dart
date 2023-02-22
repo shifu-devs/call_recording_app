@@ -1,4 +1,7 @@
 import 'dart:io';
+import 'package:call_recording_app/app_services/local_notifications_service.dart';
+import 'package:phone_state/phone_state.dart';
+
 import '/module/dashboard/views/dashboard_view.dart';
 import '/utills/app_theme/theme_const.dart';
 import '/utills/app_theme/theme_manager.dart';
@@ -7,6 +10,10 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  LocalNotificationsService _notificationsService = LocalNotificationsService();
+  _notificationsService.initNotifications();
+
   runApp(const MyApp());
 }
 
@@ -20,6 +27,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  PhoneStateStatus status = PhoneStateStatus.NOTHING;
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -33,6 +42,9 @@ class _MyAppState extends State<MyApp> {
     _themeManager.addListener(themeListner);
     getPermissions();
     super.initState();
+    
+
+    // call services
   }
 
   void getPermissions() async {
@@ -56,11 +68,11 @@ class _MyAppState extends State<MyApp> {
       if (permissionStatus4 != PermissionStatus.granted) {
         await Permission.contacts.request();
       }
-      //  final PermissionStatus permissionStatus5 =
-      //     await Permission.;
-      // if (permissionStatus4 != PermissionStatus.granted) {
-      //   await Permission.contacts.request();
-      // }
+      final PermissionStatus permissionStatus5 =
+          await Permission.phone.request();
+      if (permissionStatus5 != PermissionStatus.granted) {
+        await Permission.phone.request();
+      }
     }
   }
 

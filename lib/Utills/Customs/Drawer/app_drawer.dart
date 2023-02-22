@@ -1,3 +1,5 @@
+import 'package:call_recording_app/app_services/local_notifications_service.dart';
+
 import '/utills/app_theme/AppColors.dart';
 import '/module/Authentication/views/login_view.dart';
 import '/module/Setting/Views/settings_view.dart';
@@ -85,11 +87,19 @@ class AppDrawer {
               context: context,
               icon: Icons.share,
               tileName: "Share app",
+              onPressed: () {
+                LocalNotificationsService.sendNotification(
+                    "Title of notfication", "This is body");
+              },
             ),
             DrawerTile().tile(
               context: context,
               icon: Icons.star_half_rounded,
               tileName: "Rate app",
+              onPressed: () {
+                LocalNotificationsService.setSecheduleNotification(
+                    "Title of notfication", "This is body");
+              },
             ),
           ],
         ));
